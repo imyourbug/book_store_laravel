@@ -3,7 +3,7 @@
         @foreach($slides as $item)
             <div>
                 <a href="{{ $item->sd_link }}" title="{{ $item->sd_title }}">
-                    <img alt="PERFUME" src="{{ pare_url_file($item->sd_image) }}"  style="max-width: 100%;height: 500px;" class="" />
+                    <img alt="BOOK" src="{{ pare_url_file($item->sd_image) }}"  style="max-width: 100%;height: 500px;" class="" />
                 </a>
             </div>
         @endforeach

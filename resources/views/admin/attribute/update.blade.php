@@ -18,7 +18,8 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <form role="form" action="" method="POST">
+            <form role="form" action="{{ route('admin.attribute.excuteUpdate', ['id' => $attribute->id]) }}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-9">
@@ -84,7 +85,7 @@
         </div>
         </form>
         </div>
-      
+
     </section>
     <!-- /.content -->
 @stop

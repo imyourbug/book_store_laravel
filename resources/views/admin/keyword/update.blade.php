@@ -15,7 +15,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <div class="box-body">
-                    <form role="form" action="" method="POST">
+                    <form role="form" action="{{ route('admin.keyword.excuteUpdate', ['id' => $keyword->id]) }}" method="POST">
                          @csrf
                         <div class="col-sm-8">
                             <div class="form-group {{ $errors->first('k_name') ? 'has-error' : '' }}">
@@ -40,7 +40,7 @@
                                 <button type="submit" class="btn btn-success">Lưu dữ liệu <i class="fa fa-save"></i></button>
                             </div>
                         </div>
-                    </form>  
+                    </form>
                 </div>
             </div>
             <!-- /.box -->

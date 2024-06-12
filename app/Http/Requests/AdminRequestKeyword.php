@@ -24,7 +24,8 @@ class AdminRequestKeyword extends FormRequest
     public function rules()
     {
         return [
-            'k_name' => 'required|max:190|min:3|unique:keywords,k_name,'.$this->id
+            'id' => 'required|integer',
+            'k_name' => 'required|max:190|min:3|unique:keywords,k_name,' . $this->id
         ];
     }
 

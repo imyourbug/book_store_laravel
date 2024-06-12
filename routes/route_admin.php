@@ -39,11 +39,11 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::post('create', 'AdminCategoryController@store');
 
         Route::get('update/{id}', 'AdminCategoryController@edit')->name('admin.category.update');
-        Route::post('update/{id}', 'AdminCategoryController@update');
+        Route::put('update/{id}', 'AdminCategoryController@update')->name('admin.category.excuteUpdate');
 
         Route::get('active/{id}', 'AdminCategoryController@active')->name('admin.category.active');
         Route::get('hot/{id}', 'AdminCategoryController@hot')->name('admin.category.hot');
-        Route::get('delete/{id}', 'AdminCategoryController@delete')->name('admin.category.delete');
+        Route::delete('delete/{id}', 'AdminCategoryController@delete')->name('admin.category.delete');
     });
 
     Route::group(['prefix' => 'account-admin'], function () {
@@ -63,22 +63,22 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::post('create', 'AdminSupplierController@store');
 
         Route::get('update/{id}', 'AdminSupplierController@edit')->name('admin.ncc.update');
-        Route::post('update/{id}', 'AdminSupplierController@update');
+        Route::put('update', 'AdminSupplierController@update')->name('admin.ncc.excuteUpdate');
 
-        Route::get('delete/{id}', 'AdminSupplierController@delete')->name('admin.ncc.delete');
+        Route::delete('delete/{id}', 'AdminSupplierController@delete')->name('admin.ncc.delete');
     });
 
-    Route::group(['prefix' => 'keyword'], function () {
-        Route::get('', 'AdminKeywordController@index')->name('admin.keyword.index');
-        Route::get('create', 'AdminKeywordController@create')->name('admin.keyword.create');
-        Route::post('create', 'AdminKeywordController@store');
+    // Route::group(['prefix' => 'keyword'], function () {
+    //     Route::get('', 'AdminKeywordController@index')->name('admin.keyword.index');
+    //     Route::get('create', 'AdminKeywordController@create')->name('admin.keyword.create');
+    //     Route::post('create', 'AdminKeywordController@store');
 
-        Route::get('update/{id}', 'AdminKeywordController@edit')->name('admin.keyword.update');
-        Route::post('update/{id}', 'AdminKeywordController@update');
-        Route::get('hot/{id}', 'AdminKeywordController@hot')->name('admin.keyword.hot');
+    //     Route::get('update/{id}', 'AdminKeywordController@edit')->name('admin.keyword.update');
+    //     Route::put('update/{id}', 'AdminKeywordController@update')->name('admin.keyword.excuteUpdate');
+    //     Route::get('hot/{id}', 'AdminKeywordController@hot')->name('admin.keyword.hot');
 
-        Route::get('delete/{id}', 'AdminKeywordController@delete')->name('admin.keyword.delete');
-    });
+    //     Route::delete('delete/{id}', 'AdminKeywordController@delete')->name('admin.keyword.delete');
+    // });
 
     Route::group(['prefix' => 'attribute'], function () {
         Route::get('', 'AdminAttributeController@index')->name('admin.attribute.index');
@@ -86,10 +86,10 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::post('create', 'AdminAttributeController@store');
 
         Route::get('update/{id}', 'AdminAttributeController@edit')->name('admin.attribute.update');
-        Route::post('update/{id}', 'AdminAttributeController@update');
+        Route::put('update/{id}', 'AdminAttributeController@update')->name('admin.attribute.excuteUpdate');
         Route::get('hot/{id}', 'AdminAttributeController@hot')->name('admin.attribute.hot');
 
-        Route::get('delete/{id}', 'AdminAttributeController@delete')->name('admin.attribute.delete');
+        Route::delete('delete/{id}', 'AdminAttributeController@delete')->name('admin.attribute.delete');
     });
 
     Route::group(['prefix' => 'user'], function () {
@@ -119,9 +119,9 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::get('hot/{id}', 'AdminProductController@hot')->name('admin.product.hot');
         Route::get('active/{id}', 'AdminProductController@active')->name('admin.product.active');
         Route::get('update/{id}', 'AdminProductController@edit')->name('admin.product.update');
-        Route::post('update/{id}', 'AdminProductController@update');
+        Route::put('update', 'AdminProductController@update')->name('admin.product.excuteUpdate');
 
-        Route::get('delete/{id}', 'AdminProductController@delete')->name('admin.product.delete');
+        Route::delete('delete/{id}', 'AdminProductController@delete')->name('admin.product.delete');
         Route::get('delete-image/{id}', 'AdminProductController@deleteImage')->name('admin.product.delete_image');
     });
 
@@ -151,11 +151,11 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::post('create', 'AdminMenuController@store');
 
         Route::get('update/{id}', 'AdminMenuController@edit')->name('admin.menu.update');
-        Route::post('update/{id}', 'AdminMenuController@update');
+        Route::put('update/{id}', 'AdminMenuController@update')->name('admin.menu.excuteUpdate');
 
         Route::get('active/{id}', 'AdminMenuController@active')->name('admin.menu.active');
         Route::get('hot/{id}', 'AdminMenuController@hot')->name('admin.menu.hot');
-        Route::get('delete/{id}', 'AdminMenuController@delete')->name('admin.menu.delete');
+        Route::delete('delete/{id}', 'AdminMenuController@delete')->name('admin.menu.delete');
     });
     Route::group(['prefix' => 'comment'], function () {
         Route::get('', 'AdminCommentController@index')->name('admin.comment.index');

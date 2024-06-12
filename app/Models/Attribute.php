@@ -12,20 +12,20 @@ class Attribute extends Model
     public $type = [
         1 => [
             'name' => 'Thương hiệu',
-            'class' => 'btn-sm btn-info' 
+            'class' => 'btn-sm btn-info'
         ],
         2 =>[
-            'name'  =>'Xuất xứ thương hiệu',
+            'name'  =>'Quốc gia',
             'class' =>'btn-sm btn-success'
         ],
         3 => [
-            'name' => 'Nơi sản xuất',
-            'class' => 'btn-sm btn-primary' 
+            'name' => 'Nhà xuất bản',
+            'class' => 'btn-sm btn-primary'
         ],
-       
+
         4 => [
-            'name' => 'Đối tượng',
-            'class' => 'btn-sm btn-danger' 
+            'name' => 'Tác giả',
+            'class' => 'btn-sm btn-danger'
         ],
     ];
 

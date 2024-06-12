@@ -24,12 +24,12 @@
         <div class="login-box">
             <div class="login-logo">
                 <a href="#" style="color: rgb(41, 99, 32); font-weight: 600"><b>ĐĂNG NHẬP
-                    <br>PERFUME SHOP</b></a>
+                    <br>BOOK SHOP</b></a>
         </div>
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Đăng nhập admin PERFUME</p>
+                    <p class="login-box-msg">Đăng nhập admin BOOK</p>
                     @if (session('danger'))
                         <p class="login-box-msg text-danger">{{ session('danger') }}</p>
                     @endif

@@ -41,10 +41,11 @@ class AdminSupplierController extends Controller
 		return view('admin.supplier.update', compact('supplier'));
 	}
 
-	public function update(Request $request, $id)
+	public function update(Request $request)
 	{
 		$data = $request->except("_token");
-		Supplier::find($id)->update($data);
+        unset($data['id']);
+		Supplier::find($request->id)->update($data);
 		return redirect()->back()->with('success', 'Lưu dữ liệu thành công');
 	}
 

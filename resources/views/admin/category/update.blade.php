@@ -18,13 +18,14 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid ">
-            <form role="form" action="" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('admin.category.excuteUpdate', ['id' => $category->id]) }}" method="POST"
+                enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card card-primary">
                             <div class="card-body">
-
                                 <div class="form-group {{ $errors->first('c_name') ? 'has-error' : '' }}">
                                     <label for="name">Name <span class="text-danger">(*)</span></label>
                                     <input type="text" class="form-control" value="{{ $category->c_name }}"
@@ -53,8 +54,11 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="control-label default">Mô tả</label>
                                     <div>
-                                        <textarea name="c_description" cols="20" rows="8" style="resize:vertical; height: 218px;" class="form-control" placeholder="Mô tả ...">{{ old('c_description',isset($category) ? $category->c_description : '') }}</textarea>
-                                        <span class="text-danger"><p class="mg-t-5"></p></span>
+                                        <textarea name="c_description" cols="20" rows="8" style="resize:vertical; height: 218px;"
+                                            class="form-control" placeholder="Mô tả ...">{{ old('c_description', isset($category) ? $category->c_description : '') }}</textarea>
+                                        <span class="text-danger">
+                                            <p class="mg-t-5"></p>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -85,21 +89,27 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-default btn-choose" type="button">Chọn tệp</button>
                                         </span>
-                                        <input type="text" class="form-control" placeholder='Không có tệp nào ...'/>
+                                        <input type="text" class="form-control" placeholder='Không có tệp nào ...' />
                                         <span class="input-group-btn"></span>
                                     </div>
-                                    <span class="text-danger "><p class="mg-t-5">{{ $errors->first('c_avatar') }}</p></span>
-                                    @if(isset($category) && !empty($category->c_avatar))
-                                        <img src="{{ asset(pare_url_file($category->c_avatar)) }}" alt="" class="margin-auto-div img-rounded"  id="image_render" style="height: 150px; width:100%;">
+                                    <span class="text-danger ">
+                                        <p class="mg-t-5">{{ $errors->first('c_avatar') }}</p>
+                                    </span>
+                                    @if (isset($category) && !empty($category->c_avatar))
+                                        <img src="{{ asset(pare_url_file($category->c_avatar)) }}" alt=""
+                                            class="margin-auto-div img-rounded" id="image_render"
+                                            style="height: 150px; width:100%;">
                                     @else
-                                        <img src="{{ asset('admin/dist/img/no-image.png') }}" alt="" class="margin-auto-div img-rounded"  id="image_render" style="height: 150px; width:100%;">
+                                        <img src="{{ asset('admin/dist/img/no-image.png') }}" alt=""
+                                            class="margin-auto-div img-rounded" id="image_render"
+                                            style="height: 150px; width:100%;">
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         </div>

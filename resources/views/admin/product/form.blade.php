@@ -1,5 +1,7 @@
 <div class="container-fluid" style="overflow-x: hidden">
-    <form role="form" action="" method="POST" enctype="multipart/form-data">
+    <form role="form" action="{{ route('admin.product.excuteUpdate', ['id' => $product->id]) }}" method="POST"
+        enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="row">
             <div class="col-md-9">
@@ -85,7 +87,7 @@
                             <div class="card-header">
                                 <label class="control-label">Thuộc tính sản phẩm</label>
                             </div>
-                                <div class="card-header">
+                            <div class="card-header">
                                 <div class="row">
                                     @foreach ($attributes as $key => $attribute)
                                         <div class="form-group col-sm-3">
@@ -120,18 +122,21 @@
                             <label for="exampleInputEmail1">Album Ảnh</label>
                             @if (isset($images))
                                 <div class="row" style="margin-bottom: 15px;">
-                                    @foreach($images as $item)
+                                    @foreach ($images as $item)
                                         <div class="col-sm-2">
-                                            <a href="{{ route('admin.product.delete_image', $item->id) }}" style="display: block;">
-                                                <img src="{{ pare_url_file($item->pi_slug) }}" style="width: 70%;height: auto">
+                                            <a href="{{ route('admin.product.delete_image', $item->id) }}"
+                                                style="display: block;">
+                                                <img src="{{ pare_url_file($item->pi_slug) }}"
+                                                    style="width: 70%;height: auto">
                                             </a>
                                         </div>
                                     @endforeach
                                 </div>
                             @endif
-                             <div class="form-group">
+                            <div class="form-group">
                                 <div class="file-loading">
-                                    <input id="images" type="file" name="file[]" multiple class="file" data-overwrite-initial="false" data-min-file-count="0">
+                                    <input id="images" type="file" name="file[]" multiple class="file"
+                                        data-overwrite-initial="false" data-min-file-count="0">
                                 </div>
                             </div>
                         </div>
@@ -188,12 +193,11 @@
         </div>
     </form>
 </div>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all"
+    rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script>
-
-{{-- <script>
-    ckeditor('pro_content');
-</script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js"
+    type="text/javascript"></script>
 

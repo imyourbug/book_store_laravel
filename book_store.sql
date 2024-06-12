@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3340
--- Thời gian đã tạo: Th2 23, 2024 lúc 03:53 AM
--- Phiên bản máy phục vụ: 8.0.30
--- Phiên bản PHP: 8.1.10
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th6 12, 2024 lúc 05:08 PM
+-- Phiên bản máy phục vụ: 5.7.33
+-- Phiên bản PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `webbanhang`
+-- Cơ sở dữ liệu: `book_store`
 --
 
 -- --------------------------------------------------------
@@ -28,17 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_login` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `class` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `level` tinyint NOT NULL DEFAULT '1',
-  `status` tinyint NOT NULL DEFAULT '1',
-  `avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `log_login` text COLLATE utf8mb4_unicode_ci,
+  `class` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -59,19 +59,19 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `phone`, `log_login`, `
 --
 
 CREATE TABLE `articles` (
-  `id` bigint UNSIGNED NOT NULL,
-  `a_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `a_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `a_hot` tinyint NOT NULL DEFAULT '0',
-  `a_active` tinyint NOT NULL DEFAULT '1',
-  `a_menu_id` int NOT NULL DEFAULT '0',
-  `a_view` int NOT NULL DEFAULT '0',
-  `a_description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `a_avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `a_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `a_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `a_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `a_hot` tinyint(4) NOT NULL DEFAULT '0',
+  `a_active` tinyint(4) NOT NULL DEFAULT '1',
+  `a_menu_id` int(11) NOT NULL DEFAULT '0',
+  `a_view` int(11) NOT NULL DEFAULT '0',
+  `a_description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `a_avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `a_content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `a_position_2` tinyint NOT NULL DEFAULT '0',
-  `a_position_1` tinyint NOT NULL DEFAULT '0',
+  `a_position_2` tinyint(4) NOT NULL DEFAULT '0',
+  `a_position_1` tinyint(4) NOT NULL DEFAULT '0',
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -95,11 +95,11 @@ INSERT INTO `articles` (`id`, `a_name`, `a_slug`, `a_hot`, `a_active`, `a_menu_i
 --
 
 CREATE TABLE `attributes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `atb_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `atb_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `atb_type` tinyint NOT NULL DEFAULT '0',
-  `atb_category_id` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `atb_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `atb_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `atb_type` tinyint(4) NOT NULL DEFAULT '0',
+  `atb_category_id` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -109,38 +109,10 @@ CREATE TABLE `attributes` (
 --
 
 INSERT INTO `attributes` (`id`, `atb_name`, `atb_slug`, `atb_type`, `atb_category_id`, `created_at`, `updated_at`) VALUES
-(1, 'LOREAL', 'loreal', 1, 1, '2023-08-04 02:34:52', NULL),
-(2, 'Pháp', 'phap', 2, 1, '2023-08-04 02:37:13', NULL),
-(3, 'Trung Quốc', 'trung-quoc', 3, 1, '2023-08-04 02:37:24', NULL),
-(4, 'Nam & Nữ', 'nam-nu', 4, 1, '2023-08-04 02:37:35', NULL),
-(5, 'BIODERMA', 'bioderma', 1, 1, '2023-08-04 02:46:06', NULL),
-(6, 'Việt Nam', 'viet-nam', 3, 1, '2023-08-04 02:46:13', NULL),
-(7, 'Nhật Bản', 'nhat-ban', 3, 1, '2023-08-04 02:46:19', NULL),
-(8, 'LA ROCHE-POSAY', 'la-roche-posay', 1, 1, '2023-08-04 02:47:40', NULL),
-(9, 'France', 'france', 3, 1, '2023-08-04 02:47:49', NULL),
-(10, 'Cannada', 'cannada', 2, 1, '2023-08-04 02:52:17', NULL),
-(11, 'Hoa Kỳ', 'hoa-ky', 2, 1, '2023-08-04 02:52:24', NULL),
-(12, 'Cosrx', 'cosrx', 1, 1, '2023-08-04 02:55:35', NULL),
-(13, 'Hàn Quốc', 'han-quoc', 2, 1, '2023-08-04 02:55:45', NULL),
-(14, 'Korea', 'korea', 3, 1, '2023-08-04 02:55:55', NULL),
-(15, 'CeraVe', 'cerave', 1, 1, '2023-08-04 02:58:08', NULL),
-(16, 'Mỹ', 'my', 2, 1, '2023-08-04 02:58:16', NULL),
-(17, 'SVR', 'svr', 1, 1, '2023-08-04 03:00:09', NULL),
-(18, 'SIMPLE', 'simple', 1, 1, '2023-08-04 03:02:25', NULL),
-(19, 'Anh', 'anh', 2, 1, '2023-08-04 03:02:33', NULL),
-(20, 'Poland', 'poland', 3, 2, '2023-08-04 03:02:43', '2023-10-11 18:11:30'),
-(21, 'Klairs', 'klairs', 1, 1, '2023-08-04 03:07:02', NULL),
-(22, 'Neutrogena', 'neutrogena', 1, 1, '2023-08-04 03:09:27', NULL),
-(23, 'DHC', 'dhc', 1, 1, '2023-08-04 03:19:32', NULL),
-(24, 'Japan', 'japan', 2, 1, '2023-08-04 03:19:38', NULL),
-(25, 'Black Rouge', 'black-rouge', 1, 1, '2023-08-04 07:02:15', NULL),
-(26, 'Nam', 'nam', 4, 1, '2023-08-04 07:02:23', NULL),
-(27, 'Nữ', 'nu', 4, 1, '2023-08-04 07:02:28', '2023-10-11 18:06:00'),
-(29, '3CE', '3ce', 1, 1, '2023-10-19 08:09:06', NULL),
-(30, 'Maybelline', 'maybelline', 1, 1, '2023-10-30 18:49:58', NULL),
-(31, 'Cetaphil', 'cetaphil', 1, 1, '2023-10-30 19:14:55', NULL),
-(32, 'Canada', 'canada', 3, 1, '2023-10-30 19:15:13', NULL),
-(33, 'USA', 'usa', 3, 11, '2023-10-31 06:09:56', '2023-10-31 06:10:34');
+(1, 'Thương hiệu 1', 'thuong-hieu-1', 1, 1, '2024-06-12 15:51:57', NULL),
+(2, 'Việt Nam', 'viet-nam', 2, 1, '2024-06-12 15:52:12', NULL),
+(3, 'Kim Đồng', 'kim-dong', 3, 1, '2024-06-12 15:52:18', NULL),
+(4, 'Ngô Tất Tố 2', 'ngo-tat-to-2', 4, 1, '2024-06-12 15:52:26', '2024-06-12 16:29:56');
 
 -- --------------------------------------------------------
 
@@ -149,15 +121,15 @@ INSERT INTO `attributes` (`id`, `atb_name`, `atb_slug`, `atb_type`, `atb_categor
 --
 
 CREATE TABLE `categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `c_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `c_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `c_avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_banner` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_description` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_parent_id` int NOT NULL DEFAULT '0',
-  `c_hot` tinyint NOT NULL DEFAULT '0',
-  `c_status` tinyint NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `c_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `c_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `c_avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_banner` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_parent_id` int(11) NOT NULL DEFAULT '0',
+  `c_hot` tinyint(4) NOT NULL DEFAULT '0',
+  `c_status` tinyint(4) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -167,17 +139,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `c_name`, `c_slug`, `c_avatar`, `c_banner`, `c_description`, `c_parent_id`, `c_hot`, `c_status`, `created_at`, `updated_at`) VALUES
-(1, 'Nước hoa nam', 'nuoc-hoa-nam', '2023-08-04__48-1-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 1, 1, '2023-08-04 02:30:43', '2023-10-31 06:01:25'),
-(2, 'Nước hoa nữ', 'nuoc-hoa-nu', '2023-08-04__19-3-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 1, 1, '2023-08-04 02:31:08', '2023-08-04 03:11:26'),
-(3, 'Nước hoa 1', 'nuoc-hoa-1', '2023-08-04__9-1-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 1, 1, '2023-08-04 02:31:26', '2023-10-10 19:11:25'),
-(4, 'Nước hoa 2', 'nuoc-hoa-2', '2023-08-04__75-2-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 0, 1, '2023-08-04 02:31:55', '2023-10-10 19:11:40'),
-(5, 'Nước hoa 3', 'nuoc-hoa-3', '2023-08-04__47-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 0, 1, '2023-08-04 02:32:19', NULL),
-(6, 'Nước hoa 4', 'nuoc-hoa-4', '2023-08-04__49-img-150x150-42f4bd-fit-center.jpg', NULL, NULL, 0, 0, 1, '2023-08-04 02:32:40', '2023-10-10 19:10:16'),
-(9, 'Nước hoa 5', 'nuoc-hoa-5', '2023-08-04__thuc-pham-chuc-nang.jpg', NULL, NULL, 0, 1, 1, '2023-08-04 02:33:45', '2023-08-04 03:11:30'),
-(11, 'Nước hoa 6', 'nuoc-hoa-6', '2023-10-11__kemnen.png', NULL, NULL, 0, 0, 1, '2023-10-10 19:14:42', NULL),
-(12, 'Nước hoa 7', 'nuoc-hoa-7', '2023-10-11__mat.png', NULL, NULL, 0, 0, 1, '2023-10-10 19:16:00', NULL),
-(13, 'Nước hoa 8', 'nuoc-hoa-8', '2023-10-12__kcn.png', NULL, NULL, 0, 0, 1, '2023-10-11 18:25:44', NULL),
-(14, 'Nước hoa 9', 'nuoc-hoa-9', NULL, NULL, NULL, 0, 0, 1, '2023-10-11 18:26:49', NULL);
+(1, 'Sách', 'sach', '2024-06-12__s1.jpg', NULL, NULL, 0, 1, 1, '2024-06-12 15:47:58', '2024-06-12 15:48:05'),
+(2, 'Sách công nghệ', 'sach-cong-nghe', '2024-06-12__s1.jpg', NULL, NULL, 1, 1, 1, '2024-06-12 15:48:23', '2024-06-12 15:48:28');
 
 -- --------------------------------------------------------
 
@@ -186,16 +149,16 @@ INSERT INTO `categories` (`id`, `c_name`, `c_slug`, `c_avatar`, `c_banner`, `c_d
 --
 
 CREATE TABLE `comments` (
-  `id` bigint UNSIGNED NOT NULL,
-  `cmt_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cmt_email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cmt_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `cmt_parent_id` int NOT NULL DEFAULT '0',
-  `cmt_product_id` int NOT NULL DEFAULT '0',
-  `cmt_admin_id` int NOT NULL DEFAULT '0',
-  `cmt_user_id` int NOT NULL DEFAULT '0',
-  `cmt_like` int NOT NULL DEFAULT '0',
-  `cmt_disk_like` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cmt_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cmt_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cmt_content` text COLLATE utf8mb4_unicode_ci,
+  `cmt_parent_id` int(11) NOT NULL DEFAULT '0',
+  `cmt_product_id` int(11) NOT NULL DEFAULT '0',
+  `cmt_admin_id` int(11) NOT NULL DEFAULT '0',
+  `cmt_user_id` int(11) NOT NULL DEFAULT '0',
+  `cmt_like` int(11) NOT NULL DEFAULT '0',
+  `cmt_disk_like` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -223,14 +186,14 @@ INSERT INTO `comments` (`id`, `cmt_name`, `cmt_email`, `cmt_content`, `cmt_paren
 --
 
 CREATE TABLE `contacts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `c_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_phone` char(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `c_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_phone` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `c_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `c_name` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -248,12 +211,12 @@ INSERT INTO `contacts` (`id`, `c_title`, `c_phone`, `c_email`, `c_content`, `cre
 --
 
 CREATE TABLE `discount_code` (
-  `id` bigint UNSIGNED NOT NULL,
-  `d_code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `d_number_code` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `d_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `d_number_code` int(11) NOT NULL DEFAULT '0',
   `d_date_start` datetime DEFAULT NULL,
   `d_date_end` datetime DEFAULT NULL,
-  `d_percentage` int NOT NULL DEFAULT '0',
+  `d_percentage` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -272,14 +235,14 @@ INSERT INTO `discount_code` (`id`, `d_code`, `d_number_code`, `d_date_start`, `d
 --
 
 CREATE TABLE `events` (
-  `id` bigint UNSIGNED NOT NULL,
-  `e_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_banner` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_link` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_position_1` tinyint NOT NULL DEFAULT '0',
-  `e_position_2` tinyint NOT NULL DEFAULT '0',
-  `e_position_3` tinyint NOT NULL DEFAULT '0',
-  `e_position_4` tinyint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `e_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `e_banner` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `e_link` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `e_position_1` tinyint(4) NOT NULL DEFAULT '0',
+  `e_position_2` tinyint(4) NOT NULL DEFAULT '0',
+  `e_position_3` tinyint(4) NOT NULL DEFAULT '0',
+  `e_position_4` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -289,10 +252,10 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `e_name`, `e_banner`, `e_link`, `e_position_1`, `e_position_2`, `e_position_3`, `e_position_4`, `created_at`, `updated_at`) VALUES
-(1, 'Event 1', '2024-02-23__e2.jpg', 'https://images.', 1, 0, 0, 0, '2024-02-23 02:57:33', '2024-02-23 02:57:34'),
+(1, 'Event 1', '2024-06-12__ban1.jpg', 'https://images.', 1, 0, 0, 0, '2024-06-12 15:54:33', '2024-06-12 15:54:33'),
 (2, 'Event 2', '2023-10-19__elegant-store-sale-facebook-cover-post-8.png', 'http://127.0.0.1:8000/san-pham?k=', 0, 1, 0, 0, '2023-10-19 06:41:46', '2023-10-19 06:41:47'),
-(3, 'Event 3', '2024-02-23__event1.jpg', 'https://images.', 0, 0, 1, 0, '2024-02-23 02:57:22', '2024-02-23 02:57:22'),
-(4, 'Event4', '2023-10-13__sieu-hot-mua-he-2.png', 'http://127.0.0.1:8000/san-pham', 0, 0, 0, 0, '2023-10-12 17:40:24', '2023-10-12 17:40:24');
+(3, 'Event 3', '2024-06-12__ban2.png', 'https://images.', 0, 0, 1, 0, '2024-06-12 15:54:43', '2024-06-12 15:54:43'),
+(4, 'Event4', '2024-06-12__ban3.jpg', 'http://127.0.0.1:8000/san-pham', 0, 0, 0, 0, '2024-06-12 15:54:48', '2024-06-12 15:54:48');
 
 -- --------------------------------------------------------
 
@@ -301,10 +264,10 @@ INSERT INTO `events` (`id`, `e_name`, `e_banner`, `e_link`, `e_position_1`, `e_p
 --
 
 CREATE TABLE `exports` (
-  `id` bigint UNSIGNED NOT NULL,
-  `w_order_id` int NOT NULL,
-  `w_price` int NOT NULL DEFAULT '0',
-  `w_qty` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `w_order_id` int(11) NOT NULL,
+  `w_price` int(11) NOT NULL DEFAULT '0',
+  `w_qty` int(11) NOT NULL DEFAULT '0',
   `w_time_exports` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -317,11 +280,11 @@ CREATE TABLE `exports` (
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -332,11 +295,11 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `keywords` (
-  `id` bigint UNSIGNED NOT NULL,
-  `k_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `k_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `k_description` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `k_hot` tinyint NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `k_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `k_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `k_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `k_hot` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -348,14 +311,14 @@ CREATE TABLE `keywords` (
 --
 
 CREATE TABLE `menus` (
-  `id` bigint UNSIGNED NOT NULL,
-  `mn_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mn_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mn_avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mn_banner` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mn_description` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mn_hot` tinyint NOT NULL DEFAULT '0',
-  `mn_status` tinyint NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mn_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mn_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mn_avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mn_banner` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mn_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mn_hot` tinyint(4) NOT NULL DEFAULT '0',
+  `mn_status` tinyint(4) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -374,9 +337,9 @@ INSERT INTO `menus` (`id`, `mn_name`, `mn_slug`, `mn_avatar`, `mn_banner`, `mn_d
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -386,12 +349,12 @@ CREATE TABLE `migrations` (
 --
 
 CREATE TABLE `orders` (
-  `id` bigint UNSIGNED NOT NULL,
-  `od_transaction_id` int NOT NULL DEFAULT '0',
-  `od_product_id` int NOT NULL DEFAULT '0',
-  `od_sale` int NOT NULL DEFAULT '0',
-  `od_qty` tinyint NOT NULL DEFAULT '0',
-  `od_price` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `od_transaction_id` int(11) NOT NULL DEFAULT '0',
+  `od_product_id` int(11) NOT NULL DEFAULT '0',
+  `od_sale` int(11) NOT NULL DEFAULT '0',
+  `od_qty` tinyint(4) NOT NULL DEFAULT '0',
+  `od_price` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -429,8 +392,8 @@ INSERT INTO `orders` (`id`, `od_transaction_id`, `od_product_id`, `od_sale`, `od
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -463,16 +426,16 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 --
 
 CREATE TABLE `pay_histories` (
-  `id` int UNSIGNED NOT NULL,
-  `ph_code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ph_user_id` int UNSIGNED NOT NULL,
-  `ph_credit` int UNSIGNED NOT NULL DEFAULT '0',
-  `ph_debit` int UNSIGNED NOT NULL DEFAULT '0',
-  `ph_balance` int UNSIGNED NOT NULL DEFAULT '0',
-  `ph_meta_detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `ph_status` tinyint NOT NULL DEFAULT '0',
-  `ph_month` tinyint UNSIGNED DEFAULT NULL,
-  `ph_year` smallint UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `ph_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ph_user_id` int(10) UNSIGNED NOT NULL,
+  `ph_credit` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `ph_debit` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `ph_balance` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `ph_meta_detail` text COLLATE utf8mb4_unicode_ci,
+  `ph_status` tinyint(4) NOT NULL DEFAULT '0',
+  `ph_month` tinyint(3) UNSIGNED DEFAULT NULL,
+  `ph_year` smallint(5) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -507,17 +470,17 @@ INSERT INTO `pay_histories` (`id`, `ph_code`, `ph_user_id`, `ph_credit`, `ph_deb
 --
 
 CREATE TABLE `pay_ins` (
-  `id` int UNSIGNED NOT NULL,
-  `pi_user_id` int UNSIGNED NOT NULL,
-  `pi_admin_id` int UNSIGNED NOT NULL,
-  `pi_provider` int UNSIGNED NOT NULL DEFAULT '0',
-  `pi_money` int UNSIGNED NOT NULL DEFAULT '0',
-  `pi_fee` int UNSIGNED NOT NULL DEFAULT '0',
-  `pi_amount` int UNSIGNED NOT NULL DEFAULT '0',
-  `pi_meta_detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `pi_status` tinyint NOT NULL DEFAULT '0',
-  `pi_month` tinyint UNSIGNED DEFAULT NULL,
-  `pi_year` smallint UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `pi_user_id` int(10) UNSIGNED NOT NULL,
+  `pi_admin_id` int(10) UNSIGNED NOT NULL,
+  `pi_provider` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `pi_money` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `pi_fee` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `pi_amount` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `pi_meta_detail` text COLLATE utf8mb4_unicode_ci,
+  `pi_status` tinyint(4) NOT NULL DEFAULT '0',
+  `pi_month` tinyint(3) UNSIGNED DEFAULT NULL,
+  `pi_year` smallint(5) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -529,14 +492,14 @@ CREATE TABLE `pay_ins` (
 --
 
 CREATE TABLE `pay_outs` (
-  `id` int UNSIGNED NOT NULL,
-  `po_user_id` int UNSIGNED NOT NULL,
-  `po_transaction_id` int UNSIGNED NOT NULL,
-  `po_money` int UNSIGNED NOT NULL DEFAULT '0',
-  `po_meta_detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `po_status` tinyint NOT NULL DEFAULT '0',
-  `po_month` tinyint UNSIGNED DEFAULT NULL,
-  `po_year` smallint UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `po_user_id` int(10) UNSIGNED NOT NULL,
+  `po_transaction_id` int(10) UNSIGNED NOT NULL,
+  `po_money` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `po_meta_detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `po_status` tinyint(4) NOT NULL DEFAULT '0',
+  `po_month` tinyint(3) UNSIGNED DEFAULT NULL,
+  `po_year` smallint(5) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -571,93 +534,34 @@ INSERT INTO `pay_outs` (`id`, `po_user_id`, `po_transaction_id`, `po_money`, `po
 --
 
 CREATE TABLE `products` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pro_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pro_price` int NOT NULL DEFAULT '0',
-  `pro_price_entry` int NOT NULL DEFAULT '0' COMMENT 'giá nhập',
-  `pro_category_id` int NOT NULL DEFAULT '0',
-  `pro_supplier_id` int NOT NULL DEFAULT '0',
-  `pro_admin_id` int NOT NULL DEFAULT '0',
-  `pro_sale` tinyint NOT NULL DEFAULT '0',
-  `pro_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pro_avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_view` int NOT NULL DEFAULT '0',
-  `pro_hot` tinyint NOT NULL DEFAULT '0',
-  `pro_active` tinyint NOT NULL DEFAULT '1',
-  `pro_pay` int NOT NULL DEFAULT '0',
-  `pro_description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `pro_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `pro_review_total` int NOT NULL DEFAULT '0',
-  `pro_review_star` int NOT NULL DEFAULT '0',
-  `pro_age_review` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pro_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pro_price` int(11) NOT NULL DEFAULT '0',
+  `pro_price_entry` int(11) NOT NULL DEFAULT '0' COMMENT 'giá nhập',
+  `pro_category_id` int(11) NOT NULL DEFAULT '0',
+  `pro_supplier_id` int(11) NOT NULL DEFAULT '0',
+  `pro_admin_id` int(11) NOT NULL DEFAULT '0',
+  `pro_sale` tinyint(4) NOT NULL DEFAULT '0',
+  `pro_file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pro_avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_view` int(11) NOT NULL DEFAULT '0',
+  `pro_hot` tinyint(4) NOT NULL DEFAULT '0',
+  `pro_active` tinyint(4) NOT NULL DEFAULT '1',
+  `pro_pay` int(11) NOT NULL DEFAULT '0',
+  `pro_description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pro_content` text COLLATE utf8mb4_unicode_ci,
+  `pro_review_total` int(11) NOT NULL DEFAULT '0',
+  `pro_review_star` int(11) NOT NULL DEFAULT '0',
+  `pro_age_review` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `pro_number` int NOT NULL DEFAULT '0',
-  `pro_resistant` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_energy` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_country` tinyint NOT NULL DEFAULT '0',
+  `pro_number` int(11) NOT NULL DEFAULT '0',
+  `pro_resistant` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_energy` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pro_country` tinyint(4) NOT NULL DEFAULT '0',
   `updated_at` timestamp NULL DEFAULT NULL,
-  `pro_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `pro_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `products`
---
-
-INSERT INTO `products` (`id`, `pro_name`, `pro_slug`, `pro_price`, `pro_price_entry`, `pro_category_id`, `pro_supplier_id`, `pro_admin_id`, `pro_sale`, `pro_file`, `pro_avatar`, `pro_view`, `pro_hot`, `pro_active`, `pro_pay`, `pro_description`, `pro_content`, `pro_review_total`, `pro_review_star`, `pro_age_review`, `created_at`, `pro_number`, `pro_resistant`, `pro_energy`, `pro_country`, `updated_at`, `pro_link`) VALUES
-(1, 'Nước hoa Maybelline New York 40ML', 'tay-trang-mat-moi-maybelline-new-york-40ml', 120000, 0, 1, 2, 0, 12, '', '2023-10-31__ttmay1.jpg', 6, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-08-04 02:40:42', 20, NULL, NULL, 0, '2023-10-30 18:50:38', NULL),
-(2, 'Nước hoa LOreal Micellar Water 3-in-1', 'nuoc-tay-trang-loreal-lam-sach-sau-trang-diem-400ml-micellar-water-3-in-1', 190000, 0, 1, 2, 0, 10, '', '2023-10-31__ttlo4.jpeg', 9, 0, 1, 2, NULL, 'a', 0, 0, 0, '2023-08-04 02:43:00', 30, NULL, NULL, 0, '2023-10-30 18:40:03', NULL),
-(3, 'Nước hoa Bioderma', 'nuoc-tay-trang-bioderma-danh-cho-da-nhay-cam-500ml', 420000, 0, 1, 2, 0, 5, '', '2023-10-31__ttbi1.jpg', 4, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-08-04 02:45:43', 35, NULL, NULL, 0, '2023-10-30 18:32:44', NULL),
-(4, 'Nước hoa La Roche-Posay Micellar Water Ultra Sensitive ', 'nuoc-tay-trang-la-roche-posay-cho-da-nhay-cam-micellar-water-ultra-sensitive-skin-400ml', 490000, 0, 1, 1, 0, 15, '', '2023-10-20__ttl.jpg', 4, 0, 1, 1, NULL, 'a', 1, 5, 5, '2023-08-04 02:49:00', 19, NULL, NULL, 0, '2023-10-22 05:34:27', NULL),
-(5, 'Nước hoa Bioderma', 'nuoc-tay-trang-bioderma-da-dau-hon-hop-500ml-sebium-h2o', 480000, 0, 1, 1, 0, 9, '', '2023-10-19__taytrang1.png', 6, 1, 1, 2, NULL, 'a', 0, 0, 0, '2023-08-04 02:52:06', 45, NULL, NULL, 0, '2023-10-19 08:27:22', NULL),
-(6, 'Nước hoa Cetaphil Gentle', 'nuoc-hoa-cetaphil-gentle', 450000, 0, 2, 2, 0, 15, '', '2024-02-23__11.png', 4, 1, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 02:54:14', 30, NULL, NULL, 0, '2024-02-23 03:17:46', NULL),
-(7, 'Nước hoa Cosrx Good Morning Cleanser 150ml', 'nuoc-hoa-cosrx-good-morning-cleanser-150ml', 120000, 0, 2, 1, 0, 20, '', '2024-02-23__22.png', 1, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 02:55:24', 50, NULL, NULL, 0, '2024-02-23 03:17:50', NULL),
-(9, 'Nước hoa Svr Sebiaclear Gel Moussant 400Ml', 'nuoc-hoa-svr-sebiaclear-gel-moussant-400ml', 480000, 0, 2, 2, 0, 10, '', '2024-02-23__25.png', 9, 1, 1, 1, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:01:03', 40, NULL, NULL, 0, '2024-02-23 03:17:55', NULL),
-(10, 'Nước hoa Simple 150ml', 'nuoc-hoa-simple-150ml', 150000, 0, 2, 1, 0, 10, '', '2024-02-23__25.png', 1, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:03:51', 50, NULL, NULL, 0, '2024-02-23 03:18:00', NULL),
-(11, 'Nước hoa CeraVe 236ml', 'nuoc-hoa-cerave-236ml', 350000, 0, 2, 2, 0, 10, '', '2024-02-23__1.png', 3, 0, 1, 1, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:06:08', 30, NULL, NULL, 0, '2024-02-23 03:18:05', NULL),
-(12, 'Nước hoa Klairs Midnight Blue Calming Cream', 'nuoc-hoa-klairs-midnight-blue-calming-cream', 390000, 0, 3, 2, 0, 10, '', '2024-02-23__28.png', 1, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:07:59', 20, NULL, NULL, 0, '2024-02-23 03:18:37', NULL),
-(13, 'Nước hoa Neutrogena Boost Hyaluronic Acid Water Gel', 'nuoc-hoa-neutrogena-boost-hyaluronic-acid-water-gel', 260000, 0, 3, 2, 0, 15, '', '2024-02-23__1.png', 3, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:09:20', 40, NULL, NULL, 0, '2024-02-23 03:18:42', NULL),
-(14, 'Nước hoa La Roche-Posay Cicaplast Baume B5+ 40ml', 'nuoc-hoa-la-roche-posay-cicaplast-baume-b5-40ml', 33000, 0, 3, 1, 0, 12, '', '2024-02-23__25.png', 2, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:11:00', 29, NULL, NULL, 0, '2024-02-23 03:18:46', NULL),
-(15, 'Nước hoa Bioderma Sébium Pore Refiner 30ml', 'nuoc-hoa-bioderma-sebium-pore-refiner-30ml', 43000, 0, 3, 1, 0, 10, '', '2024-02-23__25.png', 3, 0, 1, 1, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:13:59', 34, NULL, NULL, 0, '2024-02-23 03:19:14', NULL),
-(16, 'Nước hoa Hard Capsules (30 Days Supply)', 'nuoc-hoa-hard-capsules-30-days-supply', 150000, 0, 9, 1, 0, 11, '', '2024-02-23__23.png', 1, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:20:46', 20, NULL, NULL, 0, '2024-02-23 03:19:11', NULL),
-(17, 'Nước hoa Blossomy', 'nuoc-hoa-blossomy', 399000, 0, 9, 1, 0, 20, '', '2024-02-23__27.png', 2, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:22:17', 20, NULL, NULL, 0, '2024-02-23 03:19:06', NULL),
-(18, 'Nước hoa DHC', 'nuoc-hoa-dhc', 250000, 0, 9, 1, 0, 14, '', '2024-02-23__24.png', 2, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:23:35', 20, NULL, NULL, 0, '2024-02-23 03:19:01', NULL),
-(19, 'Nước hoa Innerb', 'nuoc-hoa-innerb', 285000, 0, 9, 1, 0, 5, '', '2024-02-23__21.png', 3, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:24:53', 20, NULL, NULL, 0, '2024-02-23 03:18:55', NULL),
-(20, 'Nước hoa BlackmoresEvening Primrose Oil', 'nuoc-hoa-blackmoresevening-primrose-oil', 989000, 0, 9, 1, 0, 11, '', '2024-02-23__17.png', 1, 0, 1, 0, NULL, '<p>a</p>', 0, 0, 0, '2023-08-04 03:26:04', 20, NULL, NULL, 0, '2024-02-23 03:18:50', NULL),
-(21, 'Nước hoa Black Rouge', 'nuoc-hoa-black-rouge', 190000, 0, 6, 1, 0, 10, '', '2024-02-23__28.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-08-04 07:03:32', 34, NULL, NULL, 0, '2024-02-23 03:06:53', NULL),
-(22, 'Nước hoa 3CE Sepia Blur Water Tint', 'nuoc-hoa-3ce-sepia-blur-water-tint', 340000, 0, 6, 1, 0, 15, '', '2024-02-23__17.png', 12, 0, 1, 4, NULL, 'a', 1, 4, 4, '2023-08-04 07:04:53', 56, NULL, NULL, 0, '2024-02-23 03:10:57', NULL),
-(23, 'Nước hoa 3CE', 'nuoc-hoa-3ce', 340000, 0, 6, 1, 0, 25, '', '2024-02-23__28.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-08-04 07:06:26', 68, NULL, NULL, 0, '2024-02-23 03:10:52', NULL),
-(24, 'Nước hoa 3CE Peach Tease', 'nuoc-hoa-3ce-peach-tease', 340000, 0, 6, 1, 0, 10, '', '2024-02-23__17.png', 20, 0, 1, 7, NULL, 'a', 0, 0, 4, '2023-08-04 07:08:05', 42, NULL, NULL, 0, '2024-02-23 03:10:47', NULL),
-(28, 'Nước hoa #A12', 'nuoc-hoa-a12', 195000, 0, 6, 1, 0, 10, '', '2024-02-23__12.png', 2, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-19 07:46:33', 79, NULL, NULL, 0, '2024-02-23 03:10:43', NULL),
-(29, 'Nước hoa Sweet Cinnamon', 'nuoc-hoa-sweet-cinnamon', 190000, 0, 6, 1, 0, 10, '', '2024-02-23__16.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-20 07:19:57', 23, NULL, NULL, 0, '2024-02-23 03:10:28', NULL),
-(30, 'Nước hoa #A11 Tanned Camellia', 'nuoc-hoa-a11-tanned-camellia', 180000, 0, 6, 1, 0, 10, '', '2024-02-23__1.png', 1, 0, 1, 1, NULL, 'a', 1, 4, 4, '2023-10-20 08:07:07', 28, NULL, NULL, 0, '2024-02-23 03:10:24', NULL),
-(31, 'Nước hoa Black Rouge Tint #A02 Dry Rose', 'nuoc-hoa-black-rouge-tint-a02-dry-rose', 180000, 0, 6, 1, 0, 10, '', '2024-02-23__25.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-20 08:17:09', 30, NULL, NULL, 0, '2024-02-23 03:10:19', NULL),
-(32, 'Nước hoa Velvet Tint Break', 'nuoc-hoa-velvet-tint-break', 280000, 0, 6, 1, 0, 12, '', '2024-02-23__22.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-20 08:30:20', 19, NULL, NULL, 0, '2024-02-23 03:10:14', NULL),
-(33, 'Nước hoa Velvet Tint Nude', 'nuoc-hoa-velvet-tint-nude', 320000, 0, 6, 1, 0, 12, '', '2024-02-23__21.png', 2, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-20 08:47:21', 44, NULL, NULL, 0, '2024-02-23 03:10:09', NULL),
-(34, 'Nước hoa SVR Sebiaclear Active Gel 40ml', 'nuoc-hoa-svr-sebiaclear-active-gel-40ml', 400000, 0, 3, 2, 0, 5, '', '2024-02-23__17.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-30 19:43:19', 24, NULL, NULL, 0, '2024-02-23 03:09:56', NULL),
-(35, 'Nước hoa Cosrx The Niaciamide', 'nuoc-hoa-cosrx-the-niaciamide-15-cham-soc-toan-dien-cho-da-mun-20ml', 340000, 0, 4, 2, 0, 5, '', '2023-10-31__Nước hoacorsx.jpeg', 1, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-30 19:58:50', 31, NULL, NULL, 0, '2023-10-30 19:59:10', NULL),
-(36, 'Nước hoa SVR Sebiaclear', 'nuoc-hoa-svr-tinh-chat-giam-mun-lam-mo-tham-sam-va-mem-min-da-svr-sebiaclear-nuoc-hoa-30ml', 600000, 0, 4, 1, 0, 5, '', '2023-10-31__Nước hoasvr.jpeg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-30 20:03:33', 19, NULL, NULL, 0, '2023-10-30 20:04:10', NULL),
-(37, 'Nước hoa Klairs 35ml', 'nuoc-hoa-klairs-vitamin-c-danh-cho-da-de-kich-ung-freshly-juiced-vitamin-drop-35ml', 300000, 0, 4, 1, 0, 10, '', '2023-10-31__Nước hoaklairs.jpeg', 1, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-30 20:08:23', 39, NULL, NULL, 0, NULL, NULL),
-(38, 'Nước hoa Ipek', 'nuoc-hoa-ipek', 30000, 0, 5, 2, 0, 10, '', '2024-02-23__24.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-30 20:12:16', 100, NULL, NULL, 0, '2024-02-23 03:09:48', NULL),
-(39, 'Nước hoa Silcot Pads 82PCs', 'nuoc-hoa-silcot-pads-82pcs', 50000, 0, 5, 2, 0, 5, '', '2024-02-23__4.png', 1, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-30 20:16:22', 100, NULL, NULL, 0, '2024-02-23 03:09:41', NULL),
-(40, 'Nước hoa Jomi', 'nuoc-hoa-jomi', 32000, 0, 5, 1, 0, 10, '', '2024-02-23__17.png', 3, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-30 20:21:06', 99, NULL, NULL, 0, '2024-02-23 03:09:34', NULL),
-(41, 'Nước hoa LOréal Paris Pure Hyaluronic Acid 1.5% 30Ml', 'nuoc-hoa-sieu-cap-am-ho-tro-sang-da-loreal-paris-pure-hyaluronic-acid-15-30ml', 400000, 0, 4, 1, 0, 10, '', '2023-10-31__Nước hoalo.jpeg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 05:09:21', 30, NULL, NULL, 0, NULL, NULL),
-(42, 'Nước hoa La Roche-Posay 30ml', 'nuoc-hoa-la-roche-posay-tinh-chat-tai-tao-phuc-hoi-da-duong-da-san-chac-la-roche-posay-hyalu-b5-nuoc-hoa-30ml', 1100000, 0, 4, 1, 0, 5, '', '2023-10-31__Nước hoaro.jpeg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 05:59:30', 35, NULL, NULL, 0, '2023-10-31 05:59:48', NULL),
-(43, 'Nước hoa Maybelline Fit Me Matte + Poreless – 120 Classic Ivory (30ml)', 'kem-nen-maybelline-fit-me-matte-poreless-120-classic-ivory-30ml', 250000, 0, 11, 2, 0, 5, '', '2023-10-31__knmay.jpg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:09:29', 59, NULL, NULL, 0, '2023-10-31 06:10:45', NULL),
-(44, 'Nước hoa Maybelline Fit Me Matte Poreless Warm Nude', 'kem-nen-maybelline-fit-me-matte-poreless-kiem-dau-30ml-128-warm-nude', 200000, 0, 11, 2, 0, 10, '', '2023-10-31__knmaybe.jpg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:14:57', 46, NULL, NULL, 0, NULL, NULL),
-(45, 'Nước hoa Maybelline 128 Warm Nude 18ml', 'kem-nen-min-li-tu-nhien-maybelline-128-warm-nude-18ml', 200000, 0, 11, 2, 0, 12, '', '2023-10-31__knmay128.jpg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:20:10', 38, NULL, NULL, 0, NULL, NULL),
-(46, 'Nước hoa 3CE Velvet Fit Foundation', 'kem-nen-3ce-velvet-fit-foundation-min-li-30g-warm-ivory', 550000, 0, 11, 2, 0, 5, '', '2023-10-31__kn3ce.jpg', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:28:57', 20, NULL, NULL, 0, NULL, NULL),
-(47, 'Nước hoa 9 Ô 3CE Multi Palette #Smoother', 'nuoc-hoa-9-o-3ce-multi-palette-smoother', 450000, 0, 12, 2, 0, 3, '', '2024-02-23__26.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:38:12', 14, NULL, NULL, 0, '2024-02-23 03:09:28', NULL),
-(48, 'Nước hoa 9 Ô 3CE Multi Palette – Butter Cream', 'nuoc-hoa-9-o-3ce-multi-palette-butter-cream', 450000, 0, 12, 1, 0, 5, '', '2024-02-23__25.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:46:17', 15, NULL, NULL, 0, '2024-02-23 03:09:14', NULL),
-(49, 'Nước hoa Maybelline Hyper Sharp Laser Eyeliner 0.5g', 'nuoc-hoa-maybelline-hyper-sharp-laser-eyeliner-05g', 145000, 0, 12, 2, 0, 10, '', '2024-02-23__25.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:50:39', 50, NULL, NULL, 0, '2024-02-23 03:09:04', NULL),
-(50, 'Nước hoa Maybelline The Hyper Curl', 'nuoc-hoa-maybelline-the-hyper-curl', 150000, 0, 12, 1, 0, 10, '', '2024-02-23__23.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:53:42', 60, NULL, NULL, 0, '2024-02-23 03:08:55', NULL),
-(51, 'Nước hoa 3CE Slim Fix Waterproof Volume - Chống Thấm Nước Và Dày Từng Sợi Mi', 'nuoc-hoa-3ce-slim-fix-waterproof-volume-chong-tham-nuoc-va-day-tung-soi-mi', 390000, 0, 12, 2, 0, 5, '', '2024-02-23__14.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 06:57:26', 25, NULL, NULL, 0, '2024-02-23 03:08:45', NULL),
-(52, 'Nước hoa Maybelline Natural Brown 0.16g', 'nuoc-hoa-maybelline-natural-brown-016g', 120000, 0, 12, 2, 0, 10, '', '2024-02-23__25.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 07:00:19', 30, NULL, NULL, 0, '2024-02-23 03:08:37', NULL),
-(53, 'Nước hoa La Roche-Posay Anthelios', 'nuoc-hoa-la-roche-posay-anthelios', 450000, 0, 13, 2, 0, 10, '', '2024-02-23__16.png', 0, 0, 1, 0, NULL, 'a', 0, 0, 0, '2023-10-31 07:03:34', 59, NULL, NULL, 0, '2024-02-23 03:08:24', NULL),
-(54, 'Nước hoa Loreal Paris Defender', 'nuoc-hoa-loreal-paris-defender', 320000, 0, 13, 2, 0, 10, '', '2024-02-23__20.png', 1, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-31 07:06:46', 33, NULL, NULL, 0, '2024-02-23 03:08:01', NULL),
-(55, 'Nước hoa Klairs Soft Airy UV Essence Spf 50 PA+++++', 'nuoc-hoa-klairs-soft-airy-uv-essence-spf-50-pa', 400000, 0, 13, 2, 0, 5, '', '2024-02-23__11.png', 1, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-31 07:09:53', 39, NULL, NULL, 0, '2024-02-23 03:07:37', NULL),
-(56, 'Nước hoa Bloom Color Changing Balm', 'nuoc-hoa-bloom-color-changing-balm', 90000, 0, 14, 2, 0, 10, '', '2024-02-23__4.png', 2, 0, 1, 1, NULL, 'a', 0, 0, 0, '2023-10-31 07:12:53', 49, NULL, NULL, 0, '2024-02-23 03:05:53', NULL),
-(57, 'Nước hoa Plumping', 'nuoc-hoa-plumping', 300000, 0, 14, 2, 0, 10, '', '2024-02-23__1.png', 4, 0, 1, 1, NULL, 'a', 1, 4, 4, '2023-10-31 07:15:32', 39, NULL, NULL, 0, '2024-02-23 02:54:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -666,9 +570,9 @@ INSERT INTO `products` (`id`, `pro_name`, `pro_slug`, `pro_price`, `pro_price_en
 --
 
 CREATE TABLE `products_attributes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pa_product_id` int NOT NULL DEFAULT '0',
-  `pa_attribute_id` int NOT NULL DEFAULT '0'
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pa_product_id` int(11) NOT NULL DEFAULT '0',
+  `pa_attribute_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -676,234 +580,18 @@ CREATE TABLE `products_attributes` (
 --
 
 INSERT INTO `products_attributes` (`id`, `pa_product_id`, `pa_attribute_id`) VALUES
-(33, 8, 15),
-(34, 8, 13),
-(35, 8, 0),
-(36, 8, 4),
-(101, 25, 0),
-(102, 25, 24),
-(103, 25, 6),
-(104, 25, 4),
-(105, 26, 15),
-(106, 26, 13),
-(107, 26, 7),
-(108, 26, 4),
-(129, 27, 25),
-(130, 27, 13),
-(131, 27, 14),
-(132, 27, 27),
-(185, 5, 5),
-(186, 5, 2),
-(187, 5, 9),
-(188, 5, 4),
-(297, 4, 8),
-(298, 4, 2),
-(299, 4, 9),
-(300, 4, 4),
-(305, 3, 5),
-(306, 3, 2),
-(307, 3, 14),
-(308, 3, 4),
-(317, 2, 1),
-(318, 2, 2),
-(319, 2, 3),
-(320, 2, 4),
-(333, 1, 30),
-(334, 1, 16),
-(335, 1, 3),
-(336, 1, 4),
-(445, 35, 12),
-(446, 35, 13),
-(447, 35, 14),
-(448, 35, 4),
-(453, 36, 17),
-(454, 36, 2),
-(455, 36, 9),
-(456, 36, 4),
-(457, 37, 21),
-(458, 37, 13),
-(459, 37, 14),
-(460, 37, 4),
-(481, 41, 1),
-(482, 41, 2),
-(483, 41, 9),
-(484, 41, 4),
-(489, 42, 8),
-(490, 42, 2),
-(491, 42, 9),
-(492, 42, 4),
-(497, 43, 30),
-(498, 43, 11),
-(499, 43, 33),
-(500, 43, 27),
-(501, 44, 30),
-(502, 44, 11),
-(503, 44, 33),
-(504, 44, 27),
-(505, 45, 30),
-(506, 45, 11),
-(507, 45, 33),
-(508, 45, 27),
-(509, 46, 29),
-(510, 46, 13),
-(511, 46, 14),
-(512, 46, 27),
-(565, 57, 29),
-(566, 57, 13),
-(567, 57, 14),
-(568, 57, 27),
-(569, 56, 30),
-(570, 56, 16),
-(571, 56, 33),
-(572, 56, 27),
-(573, 21, 25),
-(574, 21, 13),
-(575, 21, 14),
-(576, 21, 27),
-(577, 55, 21),
-(578, 55, 13),
-(579, 55, 14),
-(580, 55, 4),
-(581, 54, 1),
-(582, 54, 11),
-(583, 54, 33),
-(584, 54, 4),
-(585, 53, 8),
-(586, 53, 2),
-(587, 53, 9),
-(588, 53, 4),
-(589, 52, 30),
-(590, 52, 11),
-(591, 52, 33),
-(592, 52, 27),
-(593, 51, 29),
-(594, 51, 13),
-(595, 51, 14),
-(596, 51, 27),
-(597, 50, 30),
-(598, 50, 11),
-(599, 50, 33),
-(600, 50, 27),
-(601, 49, 30),
-(602, 49, 11),
-(603, 49, 33),
-(604, 49, 27),
-(605, 48, 29),
-(606, 48, 13),
-(607, 48, 14),
-(608, 48, 4),
-(609, 47, 29),
-(610, 47, 13),
-(611, 47, 14),
-(612, 47, 27),
-(613, 40, 0),
-(614, 40, 24),
-(615, 40, 7),
-(616, 40, 4),
-(617, 39, 0),
-(618, 39, 24),
-(619, 39, 7),
-(620, 39, 4),
-(621, 38, 0),
-(622, 38, 24),
-(623, 38, 7),
-(624, 38, 4),
-(625, 34, 17),
-(626, 34, 2),
-(627, 34, 14),
-(628, 34, 4),
-(629, 33, 29),
-(630, 33, 13),
-(631, 33, 14),
-(632, 33, 27),
-(633, 32, 29),
-(634, 32, 13),
-(635, 32, 14),
-(636, 32, 27),
-(637, 31, 25),
-(638, 31, 13),
-(639, 31, 14),
-(640, 31, 27),
-(641, 30, 25),
-(642, 30, 13),
-(643, 30, 14),
-(644, 30, 27),
-(645, 29, 25),
-(646, 29, 13),
-(647, 29, 14),
-(648, 29, 27),
-(657, 28, 25),
-(658, 28, 13),
-(659, 28, 14),
-(660, 28, 27),
-(661, 24, 29),
-(662, 24, 13),
-(663, 24, 14),
-(664, 24, 27),
-(665, 23, 29),
-(666, 23, 13),
-(667, 23, 14),
-(668, 23, 27),
-(669, 22, 29),
-(670, 22, 13),
-(671, 22, 14),
-(672, 22, 27),
-(673, 6, 31),
-(674, 6, 10),
-(675, 6, 32),
-(676, 6, 4),
-(677, 7, 12),
-(678, 7, 13),
-(679, 7, 14),
-(680, 7, 4),
-(681, 9, 17),
-(682, 9, 2),
-(683, 9, 9),
-(684, 9, 4),
-(685, 10, 18),
-(686, 10, 19),
-(687, 10, 6),
-(688, 10, 4),
-(689, 11, 17),
-(690, 11, 16),
-(691, 11, 9),
-(692, 11, 4),
-(693, 12, 21),
-(694, 12, 13),
-(695, 12, 14),
-(696, 12, 4),
-(697, 13, 22),
-(698, 13, 16),
-(699, 13, 14),
-(700, 13, 4),
-(701, 14, 8),
-(702, 14, 2),
-(703, 14, 9),
-(704, 14, 4),
-(705, 20, 23),
-(706, 20, 10),
-(707, 20, 9),
-(708, 20, 4),
-(709, 19, 22),
-(710, 19, 24),
-(711, 19, 7),
-(712, 19, 4),
-(713, 18, 23),
-(714, 18, 24),
-(715, 18, 6),
-(716, 18, 4),
-(717, 17, 23),
-(718, 17, 24),
-(719, 17, 7),
-(720, 17, 4),
-(721, 16, 23),
-(722, 16, 24),
-(723, 16, 7),
-(724, 16, 4),
-(725, 15, 5),
-(726, 15, 2),
-(727, 15, 9),
-(728, 15, 4);
+(9, 1, 1),
+(10, 1, 2),
+(11, 1, 3),
+(12, 1, 4),
+(13, 2, 1),
+(14, 2, 2),
+(15, 2, 3),
+(16, 2, 4),
+(21, 3, 1),
+(22, 3, 2),
+(23, 3, 3),
+(24, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -912,9 +600,9 @@ INSERT INTO `products_attributes` (`id`, `pa_product_id`, `pa_attribute_id`) VAL
 --
 
 CREATE TABLE `products_keywords` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pk_product_id` int NOT NULL DEFAULT '0',
-  `pk_keyword_id` int NOT NULL DEFAULT '0'
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pk_product_id` int(11) NOT NULL DEFAULT '0',
+  `pk_keyword_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -924,13 +612,24 @@ CREATE TABLE `products_keywords` (
 --
 
 CREATE TABLE `product_images` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pi_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pi_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pi_product_id` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pi_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pi_slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pi_product_id` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `pi_name`, `pi_slug`, `pi_product_id`, `created_at`, `updated_at`) VALUES
+(1, 's1.jpg', '2024-06-12__s1jpg.jpg', 1, '2024-06-12 15:52:59', NULL),
+(2, 's2.jpg', '2024-06-12__s2jpg.jpg', 1, '2024-06-12 15:52:59', NULL),
+(3, 'ban1.jpg', '2024-06-12__ban1jpg.jpg', 3, '2024-06-12 16:47:52', NULL),
+(4, 'ban2.png', '2024-06-12__ban2png.png', 3, '2024-06-12 16:47:52', NULL),
+(5, 'ban3.jpg', '2024-06-12__ban3jpg.jpg', 3, '2024-06-12 16:47:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -939,15 +638,15 @@ CREATE TABLE `product_images` (
 --
 
 CREATE TABLE `ratings` (
-  `id` bigint UNSIGNED NOT NULL,
-  `r_user_id` int NOT NULL DEFAULT '0',
-  `r_product_id` int NOT NULL DEFAULT '0',
-  `r_number` tinyint NOT NULL DEFAULT '0',
-  `r_status` tinyint NOT NULL DEFAULT '0',
-  `r_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `r_user_id` int(11) NOT NULL DEFAULT '0',
+  `r_product_id` int(11) NOT NULL DEFAULT '0',
+  `r_number` tinyint(4) NOT NULL DEFAULT '0',
+  `r_status` tinyint(4) NOT NULL DEFAULT '0',
+  `r_content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `r_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `r_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -967,13 +666,13 @@ INSERT INTO `ratings` (`id`, `r_user_id`, `r_product_id`, `r_number`, `r_status`
 --
 
 CREATE TABLE `slides` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sd_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sd_link` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sd_image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sd_target` tinyint NOT NULL DEFAULT '1',
-  `sd_active` tinyint NOT NULL DEFAULT '1',
-  `sd_sort` tinyint NOT NULL DEFAULT '1',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sd_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sd_link` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sd_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sd_target` tinyint(4) NOT NULL DEFAULT '1',
+  `sd_active` tinyint(4) NOT NULL DEFAULT '1',
+  `sd_sort` tinyint(4) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -984,8 +683,8 @@ CREATE TABLE `slides` (
 
 INSERT INTO `slides` (`id`, `sd_title`, `sd_link`, `sd_image`, `sd_target`, `sd_active`, `sd_sort`, `created_at`, `updated_at`) VALUES
 (1, 'Slide 1', 'http://127.0.0.1:8000/', '2023-10-12__bia1.png', 1, 1, 0, '2023-10-12 06:44:09', '2023-10-12 06:44:09'),
-(2, 'Slide 2', 'http://127.0.0.1:8000/san-pham', '2024-02-23__event1.jpg', 1, 1, 0, '2024-02-23 03:32:54', '2024-02-23 03:32:54'),
-(3, 'Slide 3', 'http://127.0.0.1:8000/san-pham', '2024-02-23__e2.jpg', 1, 1, 0, '2024-02-23 03:33:00', '2024-02-23 03:33:00');
+(2, 'Slide 2', 'http://127.0.0.1:8000/san-pham', '2024-06-12__slide1.jpg', 1, 1, 0, '2024-06-12 15:53:53', '2024-06-12 15:53:53'),
+(3, 'Slide 3', 'http://127.0.0.1:8000/san-pham', '2024-06-12__slide2.jpg', 1, 1, 0, '2024-06-12 15:53:57', '2024-06-12 15:53:57');
 
 -- --------------------------------------------------------
 
@@ -994,13 +693,20 @@ INSERT INTO `slides` (`id`, `sd_title`, `sd_link`, `sd_image`, `sd_target`, `sd_
 --
 
 CREATE TABLE `social_accounts` (
-  `id` bigint UNSIGNED NOT NULL,
-  `provider_user_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provider` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `provider_user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provider` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `social_accounts`
+--
+
+INSERT INTO `social_accounts` (`id`, `provider_user_id`, `user_id`, `provider`, `created_at`, `updated_at`) VALUES
+(1, '118162473771899746612', '9', 'google', '2024-06-12 15:37:14', '2024-06-12 15:37:14');
 
 -- --------------------------------------------------------
 
@@ -1009,12 +715,12 @@ CREATE TABLE `social_accounts` (
 --
 
 CREATE TABLE `statics` (
-  `id` bigint UNSIGNED NOT NULL,
-  `s_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_type` tinyint NOT NULL DEFAULT '0',
-  `s_md5` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `s_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_type` tinyint(4) NOT NULL DEFAULT '0',
+  `s_md5` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_content` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1033,11 +739,11 @@ INSERT INTO `statics` (`id`, `s_title`, `s_slug`, `s_type`, `s_md5`, `s_content`
 --
 
 CREATE TABLE `supplieres` (
-  `id` bigint UNSIGNED NOT NULL,
-  `sl_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sl_phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sl_email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sl_address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sl_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sl_phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sl_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sl_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1047,8 +753,8 @@ CREATE TABLE `supplieres` (
 --
 
 INSERT INTO `supplieres` (`id`, `sl_name`, `sl_phone`, `sl_email`, `sl_address`, `created_at`, `updated_at`) VALUES
-(1, 'Mỹ Phẩm Sài Gòn', '0999999999', 'nhacungcapmypham@gmail.com', 'Quận 2,Tp. Hồ Chí Minh (TPHCM)', '2023-08-04 02:39:00', NULL),
-(2, 'Mỹ Phẩm Việt', '034955555', 'myphamviet@gmail.com', 'Đông Xuân, Hà Nội', '2023-10-21 18:15:05', NULL);
+(1, 'Nhà cung cấp Hà Nội', '0999999999', 'nhacungcap1@gmail.com', 'Quận 2, Tp. Hồ Chí Minh (TPHCM)', '2023-08-04 02:39:00', '2024-06-12 15:49:23'),
+(2, 'Nhà cung cấp HCM', '034955555', 'ncc2@gmail.com', 'Đông Xuân, Hà Nội', '2023-10-21 18:15:05', '2024-06-12 15:49:37');
 
 -- --------------------------------------------------------
 
@@ -1057,17 +763,17 @@ INSERT INTO `supplieres` (`id`, `sl_name`, `sl_phone`, `sl_email`, `sl_address`,
 --
 
 CREATE TABLE `transactions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `tst_user_id` int NOT NULL DEFAULT '0',
-  `tst_admin_id` int NOT NULL DEFAULT '0',
-  `tst_total_money` int NOT NULL DEFAULT '0',
-  `tst_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_note` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tst_status` tinyint NOT NULL DEFAULT '1',
-  `tst_type` tinyint NOT NULL DEFAULT '1' COMMENT ' 1 thanh toan thuong, 2 la thanh toan online',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tst_user_id` int(11) NOT NULL DEFAULT '0',
+  `tst_admin_id` int(11) NOT NULL DEFAULT '0',
+  `tst_total_money` int(11) NOT NULL DEFAULT '0',
+  `tst_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_note` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tst_status` tinyint(4) NOT NULL DEFAULT '1',
+  `tst_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT ' 1 thanh toan thuong, 2 la thanh toan online',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1102,18 +808,18 @@ INSERT INTO `transactions` (`id`, `tst_user_id`, `tst_admin_id`, `tst_total_mone
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `balance` int NOT NULL DEFAULT '0',
-  `log_login` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `count_comment` tinyint NOT NULL DEFAULT '0',
-  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `balance` int(11) NOT NULL DEFAULT '0',
+  `log_login` text COLLATE utf8mb4_unicode_ci,
+  `count_comment` tinyint(4) NOT NULL DEFAULT '0',
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1138,9 +844,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ph
 --
 
 CREATE TABLE `user_favourite` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uf_product_id` int NOT NULL DEFAULT '0',
-  `uf_user_id` int NOT NULL DEFAULT '0'
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uf_product_id` int(11) NOT NULL DEFAULT '0',
+  `uf_user_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1148,7 +854,7 @@ CREATE TABLE `user_favourite` (
 --
 
 INSERT INTO `user_favourite` (`id`, `uf_product_id`, `uf_user_id`) VALUES
-(4, 15, 9),
+(5, 1, 9),
 (3, 25, 3),
 (2, 26, 3);
 
@@ -1159,10 +865,10 @@ INSERT INTO `user_favourite` (`id`, `uf_product_id`, `uf_user_id`) VALUES
 --
 
 CREATE TABLE `warehouses` (
-  `id` bigint UNSIGNED NOT NULL,
-  `w_product_id` int NOT NULL,
-  `w_price` int NOT NULL DEFAULT '0',
-  `w_qty` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `w_product_id` int(11) NOT NULL,
+  `w_price` int(11) NOT NULL DEFAULT '0',
+  `w_qty` int(11) NOT NULL DEFAULT '0',
   `w_time_warehouse` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1415,181 +1121,181 @@ ALTER TABLE `warehouses`
 -- AUTO_INCREMENT cho bảng `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `discount_code`
 --
 ALTER TABLE `discount_code`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `exports`
 --
 ALTER TABLE `exports`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `keywords`
 --
 ALTER TABLE `keywords`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `pay_histories`
 --
 ALTER TABLE `pay_histories`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `pay_ins`
 --
 ALTER TABLE `pay_ins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `pay_outs`
 --
 ALTER TABLE `pay_outs`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `products_attributes`
 --
 ALTER TABLE `products_attributes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=729;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `products_keywords`
 --
 ALTER TABLE `products_keywords`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `slides`
 --
 ALTER TABLE `slides`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `social_accounts`
 --
 ALTER TABLE `social_accounts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `statics`
 --
 ALTER TABLE `statics`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `supplieres`
 --
 ALTER TABLE `supplieres`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `user_favourite`
 --
 ALTER TABLE `user_favourite`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `warehouses`
 --
 ALTER TABLE `warehouses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -4,7 +4,7 @@
             <img style="background: #ffffff !important;width: 217px;" src="{{  asset('images/logo.png') }}" alt="Web ban sách">
         </a>
         <div style="text-align: right;width: 50%">
-            <p style="margin: 0"><b>PERFUME.vn</b></p>
+            <p style="margin: 0"><b>BOOK.vn</b></p>
             <p style="margin: 0">Mã số thuế 4382942</p>
             <p style="margin: 0">Địa chỉ: <b> Ninh Kiều, CT </b> STK 9012445854</p>
             <p style="margin: 0">Điện thoại: <b>1900 2312</b></p>
@@ -49,7 +49,7 @@
 		<div class="col-5" style="padding-bottom: 100px; width: 50%;float: left;text-align: center">
 			<h3 style="margin:0">Người bán</h3>
 			<p style="margin: 0"><i>(Ký ghi rõ họ tên)</i></p>
-			<span style="margin-top: 50px;display: block"><i>PERFUME.vn</i></span>
+			<span style="margin-top: 50px;display: block"><i>BOOK.vn</i></span>
 		</div>
 		<div style="clear: both"></div>
 	</div>
