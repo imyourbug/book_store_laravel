@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequestSlide;
-use Carbon\Carbon;
 use App\Models\Slide;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AdminSlideController extends Controller
 {
     public function index()
     {
-		if (!check_admin()) return redirect()->route('get.admin.index');
+        if (!check_admin()) return redirect()->route('get.admin.index');
         $slides = Slide::paginate(20);
         return view('admin.slide.index', compact('slides'));
     }
@@ -24,37 +24,43 @@ class AdminSlideController extends Controller
 
     public function store(AdminRequestSlide $request)
     {
-        $data               = $request->except('_token','sd_avatar');
+        $data               = $request->except('_token', 'sd_avatar');
         $data['created_at'] = Carbon::now();
 
         if ($request->sd_avatar) {
             $image = upload_image('sd_avatar');
-            if ($image['code'] == 1) 
+            if ($image['code'] == 1)
                 $data['sd_image'] = $image['name'];
-        } 
+        }
 
         $id = Slide::insertGetId($data);
         return redirect()->back()->with('success', 'Lưu dữ liệu thành công');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $slide = Slide::find($id);
-        return view('admin.slide.update',compact('slide'));
+        return view('admin.slide.update', compact('slide'));
     }
 
-    public function update(AdminRequestSlide $request, $id)
+    public function update(Request $request)
     {
-        $slide              = Slide::find($id);
-        $data               = $request->except('_token','sd_avatar');
+        $request->validate([
+            'id'         => 'required',
+            'sd_title'         => 'required',
+            'sd_link'          => 'required',
+        ]);
+        $slide              = Slide::find($request->id);
+        $data               = $request->except('_token', 'sd_avatar');
         $data['created_at'] = Carbon::now();
 
         if ($request->sd_avatar) {
             $image = upload_image('sd_avatar');
-            if ($image['code'] == 1) 
+            if ($image['code'] == 1)
                 $data['sd_image'] = $image['name'];
-        } 
+        }
 
-        $update = $slide->update($data);
+        $slide->update($data);
         return redirect()->back()->with('success', 'Lưu dữ liệu thành công');
     }
 
@@ -62,7 +68,7 @@ class AdminSlideController extends Controller
     public function active($id)
     {
         $slide              = Slide::find($id);
-        $slide->sd_active = ! $slide->sd_active;
+        $slide->sd_active = !$slide->sd_active;
         $slide->save();
 
         return redirect()->back();
@@ -75,6 +81,4 @@ class AdminSlideController extends Controller
 
         return redirect()->back()->with('success', 'Xóa thành công');
     }
-
-
 }

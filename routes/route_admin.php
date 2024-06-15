@@ -181,11 +181,11 @@ Route::group(['prefix' => 'api-admin', 'namespace' => 'Admin', 'middleware' => '
         Route::post('create', 'AdminSlideController@store');
 
         Route::get('update/{id}', 'AdminSlideController@edit')->name('admin.slide.update');
-        Route::post('update/{id}', 'AdminSlideController@update');
+        Route::put('update', 'AdminSlideController@update')->name('admin.slide.excuteUpdate');
 
         Route::get('active/{id}', 'AdminSlideController@active')->name('admin.slide.active');
         Route::get('hot/{id}', 'AdminSlideController@hot')->name('admin.slide.hot');
-        Route::get('delete/{id}', 'AdminSlideController@delete')->name('admin.slide.delete');
+        Route::delete('delete/{id}', 'AdminSlideController@delete')->name('admin.slide.delete');
     });
 
     Route::group(['prefix' => 'event'], function () {

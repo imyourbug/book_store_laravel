@@ -18,7 +18,8 @@
     <!-- Main content -->
     <section class="content">
 
-        <form role="form" action="" method="POST" enctype="multipart/form-data">
+        <form role="form" action="{{ route('admin.slide.excuteUpdate', ['id' => $slide->id]) }}" method="POST" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="row">
                 <div class="col-md-9">

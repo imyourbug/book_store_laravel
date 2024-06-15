@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\DiscountCode;
 use App\Http\Requests\DiscountCodeRequest;
+use App\Models\DiscountCode;
+use Illuminate\Http\Request;
 
 class DiscountCodeController extends Controller
 {
